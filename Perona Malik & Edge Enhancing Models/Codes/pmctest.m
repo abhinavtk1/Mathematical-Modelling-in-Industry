@@ -1,0 +1,21 @@
+clc;
+clear;
+
+a=imread('cameraman.tif'); % reading the image
+a=im2double(a); % normalizing the instensity values to lie between 0 and 1
+
+ref=a;
+ad=imnoise(a,'gaussia',0.01); % adding Gaussian noise of mean zero and variance 0.01
+timestep=0.2; % timestep size used in numerical approximation
+Niter=60; % number of iterations 
+
+alpha=2.7; % Used in Numerical approximation
+w= exp(4*alpha/9); % Used in Numerical approximation
+
+b = pmc(ad,ref,3,timestep,Niter,1,w,1);
+
+% Argument 1 is the noisy image, 2 is the reference image, 
+% 3 is the lambda value = contrast parameter, 4 is the timestep size, 
+% 5 is the no of iterations, 6 is the value to show the plot, 
+% 7 is the w value used in numerical approximation
+% and last argument corresponding to choice of the numerical scheme. 
